@@ -46,8 +46,7 @@ public class CarthageEndpointTest {
     @Test
     public void testGetFiles() {
         String responseMsg = target.path("files").request().get(String.class);
-        assertEquals("a.txt", "a.txt");
-      //  assertEquals("a.txt", responseMsg);
+        assertEquals("a.txt", responseMsg);
         
     }
 }
