@@ -1,4 +1,4 @@
-package com.example;
+package com.aws.s3.restapi;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -14,7 +14,7 @@ import com.aws.s3.restapi.Main;
 
 import static org.junit.Assert.assertEquals;
 
-public class MyResourceTest {
+public class CarthageEndpointTest {
 
     private HttpServer server;
     private WebTarget target;
