@@ -50,6 +50,5 @@ public class CarthageEndpointTest {
     public void testGetFiles() {
         ArrayList<String> responseMsg = (ArrayList<String>) target.path("files").request().get(List.class);
         assertEquals("a.txt", responseMsg.get(0));
-        
     }
 }

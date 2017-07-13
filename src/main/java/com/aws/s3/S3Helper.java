@@ -211,8 +211,8 @@ public class S3Helper {
 		return keys;
 	}
 
-	public static void putObject(AmazonS3 s3, String bucketName, String key) throws IOException {
-		s3.putObject(new PutObjectRequest(bucketName, key, createSampleFile()));
+	public static void putObject(AmazonS3 s3, String bucketName, String key,File file) throws IOException {
+		s3.putObject(new PutObjectRequest(bucketName, key, file));
 	}
 	public static AmazonS3 getAmazons3(){
 		AWSCredentials  credentials;
