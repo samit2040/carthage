@@ -14,6 +14,9 @@ import com.aws.s3.restapi.Main;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CarthageEndpointTest {
 
     private HttpServer server;
@@ -45,8 +48,8 @@ public class CarthageEndpointTest {
      */
     @Test
     public void testGetFiles() {
-        String responseMsg = target.path("files").request().get(String.class);
-        assertEquals("a.txt", responseMsg);
+        ArrayList<String> responseMsg = (ArrayList<String>) target.path("files").request().get(List.class);
+        assertEquals("a.txt", responseMsg.get(0));
         
     }
 }

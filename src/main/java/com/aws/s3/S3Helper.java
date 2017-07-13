@@ -39,6 +39,7 @@ import com.amazonaws.services.s3.model.ListObjectsRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 /**
@@ -180,11 +181,11 @@ public class S3Helper {
 		s3.deleteObject(bucketName, key);
 	}
 
-	public static String getObject(AmazonS3 s3, String bucketName, String key) throws IOException {
+	public static S3ObjectInputStream getObject(AmazonS3 s3, String bucketName, String key) throws IOException {
 		System.out.println("Downloading an object");
 		S3Object object = s3.getObject(new GetObjectRequest(bucketName, key));
 		System.out.println("Content-Type: "  + object.getObjectMetadata().getContentType());
-		return readInputStream(object.getObjectContent());
+		return object.getObjectContent();
 	}
 
 	public static ArrayList<String> listBuckets(AmazonS3 s3) {
