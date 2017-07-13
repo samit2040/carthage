@@ -6,7 +6,7 @@ Exposes below rest endpoints to hit aws s3
     - `POST` `/files/:id` - uploads file into S3 bucket
     - `DELETE` `/files/:id` - deletes a specific file from S3 bucket
     
-### To compile and package the application into a WAR
+### (TODO) To compile and package the application into a WAR
 mvn clean package
 
 ### To run the test
