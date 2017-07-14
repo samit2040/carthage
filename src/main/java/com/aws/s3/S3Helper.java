@@ -27,11 +27,14 @@ import java.util.UUID;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.GetObjectRequest;
@@ -215,9 +218,11 @@ public class S3Helper {
 		s3.putObject(new PutObjectRequest(bucketName, key, file));
 	}
 	public static AmazonS3 getAmazons3(){
-		AWSCredentials  credentials;
+		//AWSCredentials  credentials;
+		BasicAWSCredentials awsCreds;
 		try {
-			  credentials = new ProfileCredentialsProvider("default").getCredentials();
+			 awsCreds = new BasicAWSCredentials("AKIAIRJOROZDYDLO43SA", "0AHc6ed+Z6AGhW9lmA8p0N2Ysv75Q10Vu7TZuS8Q");
+			  //credentials = new ProfileCredentialsProvider("default").getCredentials();
         } catch (Exception e) {
             throw new AmazonClientException(
                     "Cannot load the credentials from the credential profiles file. " +
@@ -226,10 +231,14 @@ public class S3Helper {
                     e);
         }
 
-        @SuppressWarnings("deprecation")
-		AmazonS3 s3 = new AmazonS3Client(credentials);
-        Region usWest2 = Region.getRegion(Regions.AP_SOUTHEAST_1);
-        s3.setRegion(usWest2);
+        //@SuppressWarnings("deprecation")
+		//AmazonS3 s3 = new AmazonS3Client(credentials);
+        AmazonS3 s3 = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+                .withRegion(Regions.AP_SOUTHEAST_1)
+                .build();
+        //Region usWest2 = Region.getRegion(Regions.AP_SOUTHEAST_1);
+       // s3.setRegion(usWest2);
         return s3;
 	}
 

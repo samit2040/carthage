@@ -41,7 +41,6 @@ public class CarthageEndpoint {
      *
      * @return String that will be returned as a text/plain response.
      */
-	
 	AmazonS3 s3 = S3Helper.getAmazons3();
 	//String bucketName = "samit2040-carthage";
 	String bucketName = "samit2040-created";
@@ -79,7 +78,13 @@ public class CarthageEndpoint {
                 .build();
     	
     }
-    
+    @GET
+    @Path("/test")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String test(){
+    	return "hello: success";
+    	
+    }
     
     
     
