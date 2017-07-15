@@ -62,10 +62,12 @@ fi
 DOCKER_ID_USER="samit2040"
 carthageImage="carthage:$carthageVersion-$BUILD_NUMBER"
 
-docker tag $carthageImage $DOCKER_ID_USER/$carthageImage
+docker tag $carthageImage $DOCKER_ID_USER/$carthageImage 
+docker tag $carthageImage $DOCKER_ID_USER/carthage:latest
 echo "-----------------pushing to dockerhub--------------------"
 #docker push to dockerhub
 docker push $DOCKER_ID_USER/$carthageImage
+docker push $DOCKER_ID_USER/carthage:latest
 
 #cleaning up
 docker rm -f testcarthagecontainer
