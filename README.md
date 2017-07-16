@@ -20,7 +20,7 @@ It will informs you that the application has been started and it's WADL descript
 
 
 ## Docker: To create and publish carthage's docker image onto https://hub.docker.com/r/samit2040/carthage/
-`sh buildDockerImage.sh <CARTHAGE_VERSION> <BUILD_NUMBER>` //TODO: make publish optional since it required samit2040 credentails 
+`sh buildDockerImage.sh <CARTHAGE_VERSION> <BUILD_NUMBER>` //TODO: make publish optional since it required samit2040 credentials 
 
 ### To pull down an image 
 `docker pull samit2040/carthage:<CARTHAGE_VERSION>-<BUILD_NUMBER>`
