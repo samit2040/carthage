@@ -221,7 +221,7 @@ public class S3Helper {
 		//AWSCredentials  credentials;
 		BasicAWSCredentials awsCreds;
 		try {
-			 awsCreds = new BasicAWSCredentials("AKIAIRJOROZDYDLO43SA", "0AHc6ed+Z6AGhW9lmA8p0N2Ysv75Q10Vu7TZuS8Q");
+			 awsCreds = new BasicAWSCredentials("AKIAJCOK6DBGY5U6Y3RA", "yq7KqBt157WbXn7vCYc0IbSZniB62+lHVIthd0NI");
 			  //credentials = new ProfileCredentialsProvider("default").getCredentials();
         } catch (Exception e) {
             throw new AmazonClientException(
