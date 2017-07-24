@@ -15,6 +15,8 @@ echo $warVersion
 carthageVersion=$warVersion
 BUILD_NUMBER=$1
 
+#deleting the container if any is left behind from the previous build
+docker rm -f testcarthagecontainer
 #build carthage Image
 docker build -t carthage:$carthageVersion-$BUILD_NUMBER .
 
