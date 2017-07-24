@@ -12,12 +12,12 @@ node('vagrant-vm'){
           // Run the maven build
         try{
           if (isUnix()) {
-            sh "mvn  package"
-            //sh "mvn -Dmaven.test.failure.ignore clean package"
+            //sh "mvn  package"
+            sh "mvn -Dmaven.test.failure.ignore clean package"
             }
           }catch(err){
+                junit '**/target/surefire-reports/TEST-*.xml'
                 archive '**/target/*.war'
-                junit '**/target/surefire-reports/*.xml'
                 throw err
             }
        }
