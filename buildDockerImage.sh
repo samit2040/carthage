@@ -38,9 +38,9 @@ echo $assignedPort
 # For linux :
 # Use: hitCarthageUrl="curl -sI http://localhost:$assignedPort/carthage-$carthageVersion/files/test  |  grep 200 "
 
-hitCarthageUrl="curl -sI http://$(docker-machine ip):$assignedPort/carthage-$carthageVersion/files/test |  grep 200 "
+#hitCarthageUrl="curl -sI http://$(docker-machine ip):$assignedPort/carthage-$carthageVersion/files/test |  grep 200 "
 
-#hitCarthageUrl="curl -sI http://localhost:$assignedPort/carthage-$carthageVersion/files/test  |  grep 200 "
+hitCarthageUrl="curl -sI http://localhost:$assignedPort/carthage-$carthageVersion/files/test  |  grep 200 "
 
 httpStatus=$(echo $(eval $hitCarthageUrl))
 
