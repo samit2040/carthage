@@ -2,8 +2,18 @@
 #Author:Amit Sharma
 #set -x
 
-carthageVersion=$1
-BUILD_NUMBER=$2
+for warLocation in target/*.war;do
+	echo "$warLocation"
+done
+warName=$(basename $warLocation |  sed -e "s/.war//i" | tr '[:upper:]' '[:lower:]')
+warVersion=${warName#*-}
+#warVersion=${warName#*-}"-$BUILD_NUMBER"
+echo $warName
+echo $warVersion
+
+
+carthageVersion=$warVersion
+BUILD_NUMBER=$1
 
 #build carthage Image
 docker build -t carthage:$carthageVersion-$BUILD_NUMBER .
