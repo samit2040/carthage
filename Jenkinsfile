@@ -19,7 +19,7 @@ node('vagrant-vm'){
                 junit '**/target/surefire-reports/TEST-*.xml'
                 archive '**/target/*.war'
                 throw err
-            }
+           }
        }
    stage('Results') {
       junit '**/target/surefire-reports/TEST-*.xml'
@@ -28,9 +28,7 @@ node('vagrant-vm'){
    stage('publishDockerImage') {
       // Run the maven build
       if (isUnix()) {
-         sh "docker  login --username=samit2040 --password=samit2040"
-         sh "./buildDockerImage.sh 12"
-         sh "docker logout"
+         sh "./buildDockerImage.sh"
       }
    }
 }

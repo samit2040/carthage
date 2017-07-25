@@ -11,12 +11,19 @@ warVersion=${warName#*-}
 echo $warName
 echo $warVersion
 
+RED='\033[0;31m'
 
 carthageVersion=$warVersion
-BUILD_NUMBER=$1
+if [ -z $BUILD_NUMBER ];then
+	echo -e "${RED}env variable BUILD_NUMBER not set"
+	#exit 1 
+	BUILD_NUMBER=$RANDOM
+fi	
+echo $BUILD_NUMBER
 
 #deleting the container if any is left behind from the previous build
 docker rm -f testcarthagecontainer
+
 #build carthage Image
 docker build -t carthage:$carthageVersion-$BUILD_NUMBER .
 
@@ -56,7 +63,7 @@ done
 
 if [ -z "$httpStatus" ]; then
 	echo ----------------------------------------------------------------
-	echo ------------FATAL ERROR: carthage NOT UP ----------------------------
+	echo -e "${RED}-----------FATAL ERROR: carthage NOT UP --------------"
 	echo ----------------------------------------------------------------
 	docker rm -f testcarthagecontainer
 	
@@ -76,12 +83,14 @@ carthageImage="carthage:$carthageVersion-$BUILD_NUMBER"
 
 docker tag $carthageImage $DOCKER_ID_USER/$carthageImage 
 docker tag $carthageImage $DOCKER_ID_USER/carthage:latest
+
 echo "-----------------pushing to dockerhub--------------------"
 #docker push to dockerhub
+docker  login --username=samit2040 --password=samit2040
 docker push $DOCKER_ID_USER/$carthageImage
 docker push $DOCKER_ID_USER/carthage:latest
+docker logout
 
 #cleaning up
 docker rm -f testcarthagecontainer
-#docker rm -f carthage-intermediate
 
