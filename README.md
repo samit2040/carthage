@@ -1,6 +1,8 @@
 # carthage_rest_api
 Exposes below rest endpoints to hit aws s3
 
+Live instance at : http://ec2-54-149-114-0.us-west-2.compute.amazonaws.com:8888/carthage-1.0.0/files
+
     - `GET`    `/files` - retrieves a list of files from [AWS S3](https://aws.amazon.com/s3/) bucket
     - `GET`    `/files/:id` - retrieves a specific file
     - `POST`   `/files/:id` - uploads file into S3 bucket
