@@ -1,5 +1,6 @@
 package com.aws.s3.restapi;
 
+import javax.validation.constraints.AssertTrue;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -11,6 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.aws.s3.restapi.Main;
+
+import junit.framework.Assert;
 
 import static org.junit.Assert.assertEquals;
 
@@ -49,6 +52,12 @@ public class CarthageEndpointTest {
     @Test
     public void testGetFiles() {
         ArrayList<String> responseMsg = (ArrayList<String>) target.path("files").request().get(List.class);
-        assertEquals("a.txt", responseMsg.get(0));
+        Assert.assertTrue(responseMsg.contains("a.txt"));
     }
+    @Test
+    public void testGetFilesByIDNotPresent() {
+            
+        Assert.assertEquals(404 , target.path("files/fileNotPresentinS3").request().get().getStatus());
+    }
+    
 }

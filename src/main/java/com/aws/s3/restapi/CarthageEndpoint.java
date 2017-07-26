@@ -57,6 +57,7 @@ public class CarthageEndpoint {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response getFilesId(@PathParam("id") String id) throws IOException {
+    	try{
     	final InputStream content = S3Helper.getObject(s3, bucketName, id);
     	StreamingOutput output = new StreamingOutput() {
             @Override
@@ -72,10 +73,15 @@ public class CarthageEndpoint {
 
             }
         };
-        
+    	    	
         return Response.ok(output, MediaType.APPLICATION_OCTET_STREAM)
                 .header("Content-Disposition", "attachment; filename=\"" + id + "\"" )
                 .build();
+    	}catch (Exception e) {
+			// TODO: handle exception
+    		return Response.status(404).build();
+    		
+		}
     	
     }
     @GET
@@ -99,7 +105,7 @@ public class CarthageEndpoint {
     		//return Response.status(409).build();
     		
 		
-    	return Response.status(200).entity("deleted").build();
+    	return Response.status(202).build();
     }
     
     @POST  
@@ -111,6 +117,9 @@ public class CarthageEndpoint {
             @PathParam("id") String id) { 
     	
     	try {
+    		if(! id.equalsIgnoreCase(fileDetail.getFileName())){
+    			return   Response.status(406).entity("The URI miss-matches with the Filename").build();    			
+    		}
 			S3Helper.putObject(s3, bucketName, id , createFile(uploadedInputStream));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -119,9 +128,10 @@ public class CarthageEndpoint {
             
                     //saving file  
             
-            String output = "Uploaded fileName :"+fileDetail.getFileName()+ " File successfully uploaded to S3 as "+id;  
-            return Response.status(200).entity(output).build();  
+            String output = "Uploaded fileName :"+fileDetail.getFileName()+ " File successfully uploaded to S3";  
+            return Response.status(201).entity(output).build();  
         }  
+    
     
     private static File createFile(InputStream inStream ) throws IOException {
         File file = File.createTempFile("uploadedFile",null);
