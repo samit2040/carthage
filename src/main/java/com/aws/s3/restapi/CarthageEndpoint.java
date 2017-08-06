@@ -92,19 +92,11 @@ public class CarthageEndpoint {
     	
     }
     
-    
-    
-    
     @DELETE
     @Path("/{id}")
     public Response deleteFilesId(@PathParam("id") String id) throws Exception {
-    	//ArrayList<String> files = S3Sample.listObjects(s3, bucketName);
     	
-    		S3Helper.deleteObject(s3, bucketName, id);    		
-    	
-    		//return Response.status(409).build();
-    		
-		
+    	S3Helper.deleteObject(s3, bucketName, id);    
     	return Response.status(202).build();
     }
     
@@ -125,9 +117,7 @@ public class CarthageEndpoint {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
-            
-                    //saving file  
-            
+                               
             String output = "Uploaded fileName :"+fileDetail.getFileName()+ " File successfully uploaded to S3";  
             return Response.status(201).entity(output).build();  
         }  
