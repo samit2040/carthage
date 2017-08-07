@@ -7,7 +7,7 @@ AWS S3 Bucket where files are served :  https://s3-ap-southeast-1.amazonaws.com/
 
     - `GET`    `/files` - retrieves a list of files from [AWS S3](https://aws.amazon.com/s3/) bucket
     - `GET`    `/files/:id` - retrieves a specific file
-    - `POST`   `/files/:id` - uploads file into S3 bucket
+    - `POST`   `/files` - uploads file into S3 bucket
     - `DELETE` `/files/:id` - deletes a specific file from S3 bucket
     - `GET`    `/files/test` - to test if the application is up 
     
